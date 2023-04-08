@@ -4,11 +4,14 @@ import cartIcon from './../img/basket.png';
 import Order from "./Order";
 
 const showOrders = (props) => {
+   let summa = 0;
+   props.orders.forEach(el => summa += Number.parseFloat(el.price));
    return(
       <div>
          {props.orders.map(el => (
-            <Order key={el.id} item={el}/>
+            <Order key={el.id} item={el} onDelete={props.onDelete}/>
          ))}
+         <p className="summa">Сумма: {new Intl.NumberFormat().format(summa)}$</p>
       </div>
    );
 }
